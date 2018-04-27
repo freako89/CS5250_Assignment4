@@ -192,13 +192,14 @@ def main(argv):
     print ("simulating SJF ----")
     SJF_schedule, SJF_avg_waiting_time =  SJF_scheduling(process_list, alpha = 0.5)
     write_output('SJF.txt', SJF_schedule, SJF_avg_waiting_time )
-##
-##    RR_timings = [RR_scheduling(process_list,time_quantum = tq)[1] for tq in [x * 0.1 for x in range(1, 101)]]
-##    print [x * 0.1 for x in range(1, 101)][RR_timings.index(min(RR_timings))]
-##    print min(RR_timings)
-##    SJF_timings = [SJF_scheduling(process_list, alpha = al)[1] for al in [x * 0.001 for x in range(0, 101)]]
-##    print [x * 0.1 for x in range(0, 101)][SJF_timings.index(min(SJF_timings))]
-##    print min(SJF_timings)
+
+    #Finding optimal values of Q and alpha for RR and SJF respectively
+    RR_timings = [RR_scheduling(process_list,time_quantum = tq)[1] for tq in [x * 0.1 for x in range(1, 101)]]
+    print ('\nOptimal value of Q for RR is '+str([x * 0.1 for x in range(1, 101)][RR_timings.index(min(RR_timings))]))
+    print ('with an average waiting time of '+str(min(RR_timings)))
+    SJF_timings = [SJF_scheduling(process_list, alpha = al)[1] for al in [x * 0.001 for x in range(0, 101)]]
+    print ('\nOptimal value of alpha for SJF is '+str([x * 0.1 for x in range(0, 101)][SJF_timings.index(min(SJF_timings))]))
+    print ('with an average waiting time of '+str(min(SJF_timings)))
     
 if __name__ == '__main__':
     main(sys.argv[1:])
